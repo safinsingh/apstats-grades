@@ -64,7 +64,12 @@ alpha = 0.05
 x = np.linspace(-4, 4, 200)
 y = stats.t.pdf(x, df=df)
 plt.plot(x, y)
-plt.fill_betweenx(y, x, t_statistic, where=(x <= t_statistic), color="blue", alpha=0.3)
+plt.fill_betweenx(
+    y, x, abs(t_statistic), where=(x >= abs(t_statistic)), color="blue", alpha=0.3
+)
+plt.fill_betweenx(
+    y, x, -abs(t_statistic), where=(x <= -abs(t_statistic)), color="blue", alpha=0.3
+)
 plt.text(-4, 0.3, f"t(df={df})", fontsize=16)
 
 print("T=" + str(round(t_statistic, 2)))
